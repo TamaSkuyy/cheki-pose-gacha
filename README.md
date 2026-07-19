@@ -62,9 +62,9 @@ Tinggal tambahkan object baru ke array `POSES` di `index.html`:
 - [x] 🎰 **Pity system** — dijamin dapet SSR tiap 10 gacha, biar autentik wkwk
 
 ### v1.4 — Customization
-- [ ] 🎨 **Theme picker** — warna kamera ganti sesuai warna oshi (member color)
-- [ ] ✍️ **Custom pose** — user bisa nambah pose sendiri dari UI
-- [ ] 🌐 **i18n** — English & Japanese language support
+- [x] 🎨 **Theme picker** — warna kamera ganti sesuai warna oshi (member color)
+- [x] ✍️ **Custom pose** — form rahasia buat masukin pose karangan sendiri
+- [x] 🌐 **English support** — i18n sederhana biar wota luar bisa pake
 
 ## 🛠️ Tech Stack
 
