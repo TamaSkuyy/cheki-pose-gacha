@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheki Pose Gacha ✦ Pose Generator buat Chekikai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Zen+Maru+Gothic:wght@500;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ichigo:#FF5C8A;      /* strawberry pink — penlight color */
+  --soda:#7ED3E8;        /* ramune soda blue */
+  --cream:#FFF6EC;       /* film paper cream */
+  --ink:#3B2E3A;         /* dark plum ink */
+  --lemon:#FFD966;       /* penlight yellow */
+  --mint:#A8E6C3;
+  --frame:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Zen Maru Gothic',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255,92,138,.07) 0 180px, transparent 180px),
+    radial-gradient(circle at 85% 70%, rgba(126,211,232,.09) 0 220px, transparent 220px),
+    repeating-linear-gradient(0deg, transparent 0 34px, rgba(59,46,58,.03) 34px 35px);
+}
+
+/* ── header ── */
+header{
+  text-align:center;
+  padding:2.4rem 1rem 1rem;
+  position:relative;
+}
+.eyebrow{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  background:var(--ink);
+  color:var(--cream);
+  padding:.3rem .9rem;
+  border-radius:999px;
+  transform:rotate(-2deg);
+}
+h1{
+  font-family:'Baloo 2',cursive;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  font-weight:800;
+  line-height:1.05;
+  margin-top:.7rem;
+}
+h1 .pink{color:var(--ichigo)}
+h1 .blue{color:var(--soda);text-shadow:2px 2px 0 rgba(59,46,58,.12)}
+.tagline{
+  margin-top:.5rem;
+  font-size:.95rem;
+  opacity:.75;
+}
+.tagline b{color:var(--ichigo)}
+
+/* ── camera stage ── */
+.stage{
+  max-width:520px;
+  margin:1.6rem auto 3rem;
+  padding:0 1rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* the camera body */
+.camera{
+  width:100%;
+  background:linear-gradient(180deg,#FFB3C9,#FF8FB0);
+  border:3px solid var(--ink);
+  border-radius:26px 26px 14px 14px;
+  padding:1.1rem 1.2rem .4rem;
+  position:relative;
+  box-shadow:0 10px 0 rgba(59,46,58,.15);
+  z-index:5;
+}
+.camera-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.8rem;
+}
+.lens{
+  width:74px;height:74px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 32%, #6b7push 0, #555 0%);
+  background:radial-gradient(circle at 35% 30%, #8b93a8 0%, #3B2E3A 55%);
+  border:3px solid var(--ink);
+  position:relative;
+  flex-shrink:0;
+}
+.lens::after{
+  content:'';
+  position:absolute;inset:16px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 28%, rgba(255,255,255,.85), rgba(255,255,255,0) 46%),
+             radial-gradient(circle at 60% 65%, #1c1522, #0d0a10);
+}
+.flash{
+  width:34px;height:22px;
+  background:linear-gradient(135deg,#fff8,var(--lemon));
+  border:2.5px solid var(--ink);
+  border-radius:6px;
+  transition:box-shadow .12s;
+}
+.flash.pop{
+  box-shadow:0 0 26px 10px rgba(255,246,180,.95);
+  background:#fffbe0;
+}
+.camera-brand{
+  font-family:'Baloo 2',cursive;
+  font-weight:800;
+  font-size:1rem;
+  letter-spacing:.06em;
+  color:#fff;
+  text-shadow:1.5px 1.5px 0 var(--ink);
+  flex:1;
+  text-align:center;
+}
+.mode-dial{
+  display:flex;
+  gap:.35rem;
+  flex-shrink:0;
+}
+.dial-dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--ink)}
+.dial-dot:nth-child(1){background:var(--lemon)}
+.dial-dot:nth-child(2){background:var(--mint)}
+.dial-dot:nth-child(3){background:var(--soda)}
+
+/* print slot */
+.slot{
+  margin:.95rem -1.2rem 0;
+  height:14px;
+  background:var(--ink);
+  border-radius:0 0 10px 10px;
+  position:relative;
+}
+.slot::after{
+  content:'';
+  position:absolute;
+  left:8%;right:8%;top:4px;
+  height:5px;
+  border-radius:999px;
+  background:#191219;
+}
+
+/* film tray — cheki slides down out of the slot */
+.tray{
+  width:min(320px,84%);
+  margin-top:-6px;
+  perspective:900px;
+  position:relative;
+  z-index:1;
+  min-height:430px;
+  display:flex;
+  justify-content:center;
+}
+
+/* the cheki itself */
+.cheki{
+  width:100%;
+  background:var(--frame);
+  border:2.5px solid var(--ink);
+  border-radius:8px;
+  padding:14px 14px 0;
+  box-shadow:0 14px 26px rgba(59,46,58,.22);
+  transform:translateY(-102%);
+  opacity:0;
+  position:absolute;
+  top:0;
+}
+.cheki.printing{
+  animation:printOut 1.15s cubic-bezier(.2,.9,.3,1.04) forwards;
+}
+@keyframes printOut{
+  0%{transform:translateY(-102%);opacity:1}
+  70%{transform:translateY(6%) rotate(0deg)}
+  100%{transform:translateY(0) rotate(-1.4deg);opacity:1}
+}
+.photo{
+  background:linear-gradient(160deg,#FDE7EF 0%,#E7F6FB 100%);
+  border:2px solid var(--ink);
+  border-radius:4px;
+  aspect-ratio:4/4.6;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+  padding:1rem .8rem;
+  position:relative;
+  overflow:hidden;
+}
+/* developing effect */
+.photo::before{
+  content:'';
+  position:absolute;inset:0;
+  background:#bcae9f;
+  opacity:0;
+  pointer-events:none;
+  z-index:3;
+}
+.cheki.printing .photo::before{
+  animation:develop 2.2s ease-out .35s forwards;
+  opacity:1;
+}
+@keyframes develop{
+  0%{opacity:1}
+  100%{opacity:0}
+}
+.kaomoji{
+  font-size:clamp(1.5rem,5.5vw,2rem);
+  font-weight:700;
+  text-align:center;
+  line-height:1.3;
+  word-break:keep-all;
+}
+.pose-name{
+  font-family:'Baloo 2',cursive;
+  font-weight:800;
+  font-size:1.15rem;
+  color:var(--ichigo);
+  text-align:center;
+  line-height:1.15;
+}
+.pose-cat{
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  background:var(--ink);
+  color:#fff;
+  padding:.18rem .6rem;
+  border-radius:999px;
+}
+.sticker{
+  position:absolute;
+  font-size:1.15rem;
+  filter:drop-shadow(1px 1px 0 rgba(59,46,58,.2));
+}
+.sticker.s1{top:8px;left:10px;transform:rotate(-12deg)}
+.sticker.s2{bottom:10px;right:10px;transform:rotate(10deg)}
+
+/* white bottom of instax = caption area */
+.caption{
+  min-height:120px;
+  padding:.75rem .2rem .9rem;
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+.role-line{
+  display:flex;
+  gap:.5rem;
+  align-items:flex-start;
+  font-size:.85rem;
+  line-height:1.45;
+}
+.role-tag{
+  flex-shrink:0;
+  font-family:'Baloo 2',cursive;
+  font-weight:700;
+  font-size:.72rem;
+  padding:.14rem .55rem;
+  border-radius:999px;
+  border:2px solid var(--ink);
+  margin-top:.1rem;
+}
+.role-tag.you{background:var(--lemon)}
+.role-tag.idol{background:var(--soda)}
+.signature{
+  font-family:'Caveat',cursive;
+  font-size:1.05rem;
+  color:var(--ichigo);
+  text-align:right;
+  opacity:.85;
+  margin-top:-.2rem;
+}
+
+/* empty state before first print */
+.empty-hint{
+  position:absolute;
+  top:120px;
+  text-align:center;
+  font-size:.9rem;
+  opacity:.55;
+  width:100%;
+  padding:0 1rem;
+}
+.empty-hint .arrow{
+  display:block;
+  font-size:1.6rem;
+  animation:bob 1.4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* ── controls ── */
+.controls{
+  margin-top:1.4rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.9rem;
+  width:100%;
+  z-index:6;
+}
+.btn-random{
+  font-family:'Baloo 2',cursive;
+  font-weight:800;
+  font-size:1.2rem;
+  color:#fff;
+  background:var(--ichigo);
+  border:3px solid var(--ink);
+  border-radius:999px;
+  padding:.85rem 2.4rem;
+  cursor:pointer;
+  box-shadow:0 6px 0 var(--ink);
+  transition:transform .08s, box-shadow .08s;
+  letter-spacing:.02em;
+}
+.btn-random:hover{transform:translateY(2px);box-shadow:0 4px 0 var(--ink)}
+.btn-random:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
+.btn-random:focus-visible{outline:3px dashed var(--soda);outline-offset:4px}
+.btn-random:disabled{opacity:.6;cursor:wait}
+
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.45rem;
+}
+.chip{
+  font-family:'Zen Maru Gothic',sans-serif;
+  font-weight:700;
+  font-size:.78rem;
+  padding:.38rem .85rem;
+  border-radius:999px;
+  border:2px solid var(--ink);
+  background:#fff;
+  cursor:pointer;
+  transition:background .12s, transform .12s;
+}
+.chip:hover{transform:translateY(-2px)}
+.chip:focus-visible{outline:3px dashed var(--ichigo);outline-offset:2px}
+.chip.active{background:var(--ink);color:#fff}
+
+.counter{
+  font-size:.78rem;
+  opacity:.6;
+}
+.counter b{color:var(--ichigo)}
+
+/* ── footer ── */
+footer{
+  text-align:center;
+  padding:1.5rem 1rem 2.5rem;
+  font-size:.8rem;
+  opacity:.65;
+}
+footer .heart{color:var(--ichigo)}
+
+@media (prefers-reduced-motion: reduce){
+  .cheki.printing{animation:none;transform:translateY(0) rotate(-1.4deg);opacity:1}
+  .cheki.printing .photo::before{animation:none;opacity:0}
+  .empty-hint .arrow{animation:none}
+  *{transition:none !important}
+}
+@media (max-width:420px){
+  .lens{width:60px;height:60px}
+  .camera-brand{font-size:.85rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="eyebrow">Pose Generator ✦ Chekikai Edition</span>
+  <h1>Cheki <span class="pink">Pose</span> <span class="blue">Gacha</span></h1>
+  <p class="tagline">Bingung mau pose apa pas cheki bareng oshi? <b>Gacha aja!</b> ✌️</p>
+</header>
+
+<main class="stage">
+  <div class="camera" aria-hidden="true">
+    <div class="camera-top">
+      <div class="lens"></div>
+      <div class="camera-brand">CHEKI☆MATIC</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.5rem">
+        <div class="flash" id="flash"></div>
+        <div class="mode-dial">
+          <span class="dial-dot"></span><span class="dial-dot"></span><span class="dial-dot"></span>
+        </div>
+      </div>
+    </div>
+    <div class="slot"></div>
+  </div>
+
+  <div class="tray" id="tray" aria-live="polite">
+    <div class="empty-hint" id="emptyHint">
+      <span class="arrow">👇</span>
+      Pencet tombol gacha di bawah,<br>nanti cheki-nya nge-print sendiri~
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn-random" id="btnRandom">🎲 Gacha Pose!</button>
+    <div class="filters" id="filters" role="group" aria-label="Filter kategori pose">
+      <button class="chip active" data-cat="all">Semua</button>
+      <button class="chip" data-cat="classic">Classic</button>
+      <button class="chip" data-cat="lucu">Lucu</button>
+      <button class="chip" data-cat="sweet">Sweet</button>
+      <button class="chip" data-cat="chaos">Chaos</button>
+    </div>
+    <div class="counter" id="counter">Udah gacha <b>0</b> kali ✦ semoga dapet pose SSR</div>
+  </div>
+</main>
+
+<footer>
+  Dibuat dengan <span class="heart">♥</span> buat para wota yang suka mati gaya pas chekikai
+</footer>
+
+<script>
+const POSES = [
+  // classic
+  {cat:'classic', name:'Double Peace', kao:'(￣▽￣)ｖ ｖ(＾ω＾)', you:'Peace sign dua tangan di samping pipi', idol:'Peace sign juga, badan miring dikit ke arah kamu', stickers:['✌️','⭐']},
+  {cat:'classic', name:'Finger Heart Duo', kao:'(♡´∀`)人(´∀`♡)', you:'Finger heart Korea di depan dada', idol:'Finger heart ditempel ke finger heart kamu', stickers:['💗','✨']},
+  {cat:'classic', name:'Salute Pose', kao:'(￣^￣)ゞ (｀・ω・´)ゞ', you:'Hormat ala militer, muka serius (tapi gagal)', idol:'Hormat balik, senyum profesional', stickers:['🫡','⭐']},
+  {cat:'classic', name:'Back-to-Back Cool', kao:'(¬‿¬) (⌐■_■)', you:'Punggung-punggungan, tangan dilipat, muka sok cool', idol:'Sama, tapi nengok dikit ke kamera', stickers:['😎','🔥']},
+  {cat:'classic', name:'Penlight Cheers', kao:'ヽ(＾Д＾)ﾉ ＼(◎o◎)／', you:'Angkat penlight kayak lagi toast', idol:'Tangan kepal semangat, mulut bilang "hoi!"', stickers:['🍻','🌟']},
+  // sweet
+  {cat:'sweet', name:'Big Heart Berdua', kao:'(っ˘з(˘⌣˘ )', you:'Tangan kanan bikin setengah hati', idol:'Tangan kiri nyambungin jadi hati utuh', stickers:['💖','🎀']},
+  {cat:'sweet', name:'Cheek Heart', kao:'(´,,•ω•,,)♡', you:'Dua tangan bikin hati kecil di pipi sendiri', idol:'Nunjuk kamu sambil senyum "kawaii~"', stickers:['🥰','💕']},
+  {cat:'sweet', name:'Head Pat (Virtual)', kao:'(´･ω･)ノ(._.`)', you:'Nunduk dikit, muka bahagia', idol:'Tangan melayang di atas kepala kamu (no touch!)', stickers:['🖐️','💮']},
+  {cat:'sweet', name:'Love Beam', kao:'(♡-_-♡) ⌒☆', you:'Kena tembak: tangan di dada, pura-pura jatuh', idol:'Nembak love beam pake finger gun', stickers:['💘','⚡']},
+  {cat:'sweet', name:'Mini Hug Frame', kao:'⊂(´・ω・｀⊂)', you:'Dua tangan bikin frame kotak, idol di dalamnya', idol:'Pose imut di dalam "frame" tangan kamu', stickers:['🖼️','💝']},
+  // lucu
+  {cat:'lucu', name:'Kucing Ganda', kao:'(=^･ω･^=) (=①ω①=)', you:'Cakar kucing dua tangan + "nya~"', idol:'Cakar kucing juga, kepala miring', stickers:['🐱','🐾']},
+  {cat:'lucu', name:'Muscle Pose', kao:'ᕦ(ò_óˇ)ᕤ ᕙ(⇀‸↼‶)ᕗ', you:'Flexing biceps (ada atau nggak, tetep flexing)', idol:'Flexing balik lebih niat', stickers:['💪','🔥']},
+  {cat:'lucu', name:'Kabedon Terbalik', kao:'(ﾟдﾟ；) (￣ー￣)', you:'Pura-pura kaget di-kabedon', idol:'Tangan nempel ke udara samping kepala kamu', stickers:['🧱','💥']},
+  {cat:'lucu', name:'Sleeping Idol', kao:'(＿ ＿*) Z z z', you:'Nunjuk idol sambil muka panik', idol:'Pura-pura ketiduran, tangan jadi bantal', stickers:['😴','💤']},
+  {cat:'lucu', name:'Food Fight', kao:'(っ˘ڡ˘ς) (๑>؂<๑)', you:'Pura-pura nyuapin pake tangan kosong', idol:'Buka mulut lebar "aaa~"', stickers:['🍙','🍰']},
+  {cat:'lucu', name:'Alien Contact', kao:'(⊙ヮ⊙) 👽', you:'Pose alien: dua jari V di dahi', idol:'Pose alien juga, mata melotot', stickers:['👽','🛸']},
+  // chaos
+  {cat:'chaos', name:'JJK Domain Expansion', kao:'( ｰ̀дｰ́ )✋ (͡° ͜ʖ ͡°)', you:'Tangan bikin segel domain expansion', idol:'Segel juga, muka super serius', stickers:['🌀','☄️']},
+  {cat:'chaos', name:'Wota Gaya Bebas', kao:'ヾ(≧▽≦*)o ┗(＾0＾)┓', you:'Freeze mid-wotagei, tangan ke atas', idol:'Ikutan wotagei, ketawa lepas', stickers:['🕺','🎤']},
+  {cat:'chaos', name:'Dramatic Kdrama', kao:'(╥﹏╥) (ಥ‿ಥ)', you:'Tangan di dahi, pose pingsan drama', idol:'Nangkep kamu ala drama Korea', stickers:['🎬','😭']},
+  {cat:'chaos', name:'Gyaru Peace Max', kao:'(★≧▽^))★☆', you:'Peace terbalik di bawah dagu, duck face', idol:'Peace terbalik juga, lidah keluar dikit', stickers:['💅','⭐']},
+  {cat:'chaos', name:'Final Boss Pose', kao:'(｀∀´)Ψ (◣_◢)', you:'Pose villain: tangan bikin cakar', idol:'Cross arms, senyum menyeringai', stickers:['😈','⚔️']},
+  {cat:'chaos', name:'Gravity Falls', kao:'ヘ(￣ω￣ヘ) (ノ￣ω￣)ノ', you:'Miring 45° ke kiri kayak mau jatuh', idol:'Miring 45° ke kanan, saling nyeimbangin', stickers:['🫨','🌪️']},
+];
+
+const tray = document.getElementById('tray');
+const btn = document.getElementById('btnRandom');
+const flash = document.getElementById('flash');
+const counter = document.getElementById('counter');
+const emptyHint = document.getElementById('emptyHint');
+const filterWrap = document.getElementById('filters');
+
+let currentCat = 'all';
+let count = 0;
+let lastIndex = -1;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+filterWrap.addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  filterWrap.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+  currentCat = chip.dataset.cat;
+});
+
+function pickPose(){
+  const pool = currentCat==='all' ? POSES : POSES.filter(p=>p.cat===currentCat);
+  let idx;
+  do { idx = Math.floor(Math.random()*pool.length); }
+  while(pool.length>1 && POSES.indexOf(pool[idx])===lastIndex);
+  lastIndex = POSES.indexOf(pool[idx]);
+  return pool[idx];
+}
+
+const CAT_LABEL = {classic:'Classic', lucu:'Lucu', sweet:'Sweet', chaos:'Chaos'};
+
+function renderCheki(pose){
+  const el = document.createElement('div');
+  el.className = 'cheki';
+  el.innerHTML = `
+    <div class="photo">
+      <span class="sticker s1">${pose.stickers[0]}</span>
+      <span class="sticker s2">${pose.stickers[1]}</span>
+      <span class="pose-cat">${CAT_LABEL[pose.cat]}</span>
+      <div class="kaomoji">${pose.kao}</div>
+      <div class="pose-name">${pose.name}</div>
+    </div>
+    <div class="caption">
+      <div class="role-line"><span class="role-tag you">Kamu</span><span>${pose.you}</span></div>
+      <div class="role-line"><span class="role-tag idol">Oshi</span><span>${pose.idol}</span></div>
+      <div class="signature">— cheki #${String(count).padStart(3,'0')} ♡</div>
+    </div>`;
+  return el;
+}
+
+btn.addEventListener('click', ()=>{
+  btn.disabled = true;
+  emptyHint.style.display = 'none';
+  count++;
+
+  // flash pop
+  flash.classList.add('pop');
+  setTimeout(()=>flash.classList.remove('pop'), 180);
+
+  // remove old cheki
+  const old = tray.querySelector('.cheki');
+  if(old) old.remove();
+
+  const pose = pickPose();
+  const cheki = renderCheki(pose);
+  tray.appendChild(cheki);
+
+  // trigger print animation
+  requestAnimationFrame(()=>{
+    cheki.classList.add('printing');
+  });
+
+  counter.innerHTML = `Udah gacha <b>${count}</b> kali ✦ ${count>=10?'sabar, pose SSR pasti keluar 😤':'semoga dapet pose SSR'}`;
+
+  setTimeout(()=>{ btn.disabled = false; }, reduceMotion? 150 : 1000);
+});
+</script>
+</body>
+</html>
