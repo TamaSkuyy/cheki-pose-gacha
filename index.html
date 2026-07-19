@@ -162,7 +162,7 @@ h1 .blue{color:var(--soda);text-shadow:2px 2px 0 rgba(59,46,58,.12)}
   perspective:900px;
   position:relative;
   z-index:1;
-  min-height:430px;
+  min-height:540px;
   display:flex;
   justify-content:center;
 }
@@ -469,42 +469,42 @@ footer .heart{color:var(--ichigo)}
 <script>
 const POSES = [
   // classic
-  {id:'classic-peace', mode:'standard', cat:'classic', name:'Double Peace', kao:'(￣▽￣)ｖ ｖ(＾ω＾)', you:'Peace sign dua tangan di samping pipi', idol:'Peace sign juga, badan miring dikit ke arah kamu', stickers:['✌️','⭐']},
-  {id:'classic-heart', mode:'standard', cat:'classic', name:'Finger Heart Duo', kao:'(♡´∀`)人(´∀`♡)', you:'Finger heart Korea di depan dada', idol:'Finger heart ditempel ke finger heart kamu', stickers:['💗','✨']},
-  {id:'classic-salute', mode:'standard', cat:'classic', name:'Salute Pose', kao:'(￣^￣)ゞ (｀・ω・´)ゞ', you:'Hormat ala militer, muka serius (tapi gagal)', idol:'Hormat balik, senyum profesional', stickers:['🫡','⭐']},
-  {id:'classic-cool', mode:'standard', cat:'classic', name:'Back-to-Back Cool', kao:'(¬‿¬) (⌐■_■)', you:'Punggung-punggungan, tangan dilipat, muka sok cool', idol:'Sama, tapi nengok dikit ke kamera', stickers:['😎','🔥']},
-  {id:'classic-toast', mode:'standard', cat:'classic', name:'Penlight Cheers', kao:'ヽ(＾Д＾)ﾉ ＼(◎o◎)／', you:'Angkat penlight kayak lagi toast', idol:'Tangan kepal semangat, mulut bilang "hoi!"', stickers:['🍻','🌟']},
+  {id:'classic-peace', rarity:'N', mode:'standard', cat:'classic', name:'Double Peace', kao:'(￣▽￣)ｖ ｖ(＾ω＾)', you:'Peace sign dua tangan di samping pipi', idol:'Peace sign juga, badan miring dikit ke arah kamu', stickers:['✌️','⭐']},
+  {id:'classic-heart', rarity:'N', mode:'standard', cat:'classic', name:'Finger Heart Duo', kao:'(♡´∀`)人(´∀`♡)', you:'Finger heart Korea di depan dada', idol:'Finger heart ditempel ke finger heart kamu', stickers:['💗','✨']},
+  {id:'classic-salute', rarity:'N', mode:'standard', cat:'classic', name:'Salute Pose', kao:'(￣^￣)ゞ (｀・ω・´)ゞ', you:'Hormat ala militer, muka serius (tapi gagal)', idol:'Hormat balik, senyum profesional', stickers:['🫡','⭐']},
+  {id:'classic-cool', rarity:'R', mode:'standard', cat:'classic', name:'Back-to-Back Cool', kao:'(¬‿¬) (⌐■_■)', you:'Punggung-punggungan, tangan dilipat, muka sok cool', idol:'Sama, tapi nengok dikit ke kamera', stickers:['😎','🔥']},
+  {id:'classic-toast', rarity:'N', mode:'standard', cat:'classic', name:'Penlight Cheers', kao:'ヽ(＾Д＾)ﾉ ＼(◎o◎)／', you:'Angkat penlight kayak lagi toast', idol:'Tangan kepal semangat, mulut bilang "hoi!"', stickers:['🍻','🌟']},
   // sweet
-  {id:'sweet-bigheart', mode:'standard', cat:'sweet', name:'Big Heart Berdua', kao:'(っ˘з(˘⌣˘ )', you:'Tangan kanan bikin setengah hati', idol:'Tangan kiri nyambungin jadi hati utuh', stickers:['💖','🎀']},
-  {id:'sweet-cheek', mode:'standard', cat:'sweet', name:'Cheek Heart', kao:'(´,,•ω•,,)♡', you:'Dua tangan bikin hati kecil di pipi sendiri', idol:'Nunjuk kamu sambil senyum "kawaii~"', stickers:['🥰','💕']},
-  {id:'sweet-pat', mode:'standard', cat:'sweet', name:'Head Pat (Virtual)', kao:'(´･ω･)ノ(._.`)', you:'Nunduk dikit, muka bahagia', idol:'Tangan melayang di atas kepala kamu (no touch!)', stickers:['🖐️','💮']},
-  {id:'sweet-beam', mode:'standard', cat:'sweet', name:'Love Beam', kao:'(♡-_-♡) ⌒☆', you:'Kena tembak: tangan di dada, pura-pura jatuh', idol:'Nembak love beam pake finger gun', stickers:['💘','⚡']},
-  {id:'sweet-frame', mode:'standard', cat:'sweet', name:'Mini Hug Frame', kao:'⊂(´・ω・｀⊂)', you:'Dua tangan bikin frame kotak, idol di dalamnya', idol:'Pose imut di dalam "frame" tangan kamu', stickers:['🖼️','💝']},
+  {id:'sweet-bigheart', rarity:'N', mode:'standard', cat:'sweet', name:'Big Heart Berdua', kao:'(っ˘з(˘⌣˘ )', you:'Tangan kanan bikin setengah hati', idol:'Tangan kiri nyambungin jadi hati utuh', stickers:['💖','🎀']},
+  {id:'sweet-cheek', rarity:'N', mode:'standard', cat:'sweet', name:'Cheek Heart', kao:'(´,,•ω•,,)♡', you:'Dua tangan bikin hati kecil di pipi sendiri', idol:'Nunjuk kamu sambil senyum "kawaii~"', stickers:['🥰','💕']},
+  {id:'sweet-pat', rarity:'N', mode:'standard', cat:'sweet', name:'Head Pat (Virtual)', kao:'(´･ω･)ノ(._.`)', you:'Nunduk dikit, muka bahagia', idol:'Tangan melayang di atas kepala kamu (no touch!)', stickers:['🖐️','💮']},
+  {id:'sweet-beam', rarity:'R', mode:'standard', cat:'sweet', name:'Love Beam', kao:'(♡-_-♡) ⌒☆', you:'Kena tembak: tangan di dada, pura-pura jatuh', idol:'Nembak love beam pake finger gun', stickers:['💘','⚡']},
+  {id:'sweet-frame', rarity:'N', mode:'standard', cat:'sweet', name:'Mini Hug Frame', kao:'⊂(´・ω・｀⊂)', you:'Dua tangan bikin frame kotak, idol di dalamnya', idol:'Pose imut di dalam "frame" tangan kamu', stickers:['🖼️','💝']},
   // lucu
-  {id:'lucu-cat', mode:'standard', cat:'lucu', name:'Kucing Ganda', kao:'(=^･ω･^=) (=①ω①=)', you:'Cakar kucing dua tangan + "nya~"', idol:'Cakar kucing juga, kepala miring', stickers:['🐱','🐾']},
-  {id:'lucu-muscle', mode:'standard', cat:'lucu', name:'Muscle Pose', kao:'ᕦ(ò_óˇ)ᕤ ᕙ(⇀‸↼‶)ᕗ', you:'Flexing biceps (ada atau nggak, tetep flexing)', idol:'Flexing balik lebih niat', stickers:['💪','🔥']},
-  {id:'lucu-kabedon', mode:'standard', cat:'lucu', name:'Kabedon Terbalik', kao:'(ﾟдﾟ；) (￣ー￣)', you:'Pura-pura kaget di-kabedon', idol:'Tangan nempel ke udara samping kepala kamu', stickers:['🧱','💥']},
-  {id:'lucu-sleep', mode:'standard', cat:'lucu', name:'Sleeping Idol', kao:'(＿ ＿*) Z z z', you:'Nunjuk idol sambil muka panik', idol:'Pura-pura ketiduran, tangan jadi bantal', stickers:['😴','💤']},
-  {id:'lucu-food', mode:'standard', cat:'lucu', name:'Food Fight', kao:'(っ˘ڡ˘ς) (๑>؂<๑)', you:'Pura-pura nyuapin pake tangan kosong', idol:'Buka mulut lebar "aaa~"', stickers:['🍙','🍰']},
-  {id:'lucu-alien', mode:'standard', cat:'lucu', name:'Alien Contact', kao:'(⊙ヮ⊙) 👽', you:'Pose alien: dua jari V di dahi', idol:'Pose alien juga, mata melotot', stickers:['👽','🛸']},
+  {id:'lucu-cat', rarity:'N', mode:'standard', cat:'lucu', name:'Kucing Ganda', kao:'(=^･ω･^=) (=①ω①=)', you:'Cakar kucing dua tangan + "nya~"', idol:'Cakar kucing juga, kepala miring', stickers:['🐱','🐾']},
+  {id:'lucu-muscle', rarity:'N', mode:'standard', cat:'lucu', name:'Muscle Pose', kao:'ᕦ(ò_óˇ)ᕤ ᕙ(⇀‸↼‶)ᕗ', you:'Flexing biceps (ada atau nggak, tetep flexing)', idol:'Flexing balik lebih niat', stickers:['💪','🔥']},
+  {id:'lucu-kabedon', rarity:'SR', mode:'standard', cat:'lucu', name:'Kabedon Terbalik', kao:'(ﾟдﾟ；) (￣ー￣)', you:'Pura-pura kaget di-kabedon', idol:'Tangan nempel ke udara samping kepala kamu', stickers:['🧱','💥']},
+  {id:'lucu-sleep', rarity:'SR', mode:'standard', cat:'lucu', name:'Sleeping Idol', kao:'(＿ ＿*) Z z z', you:'Nunjuk idol sambil muka panik', idol:'Pura-pura ketiduran, tangan jadi bantal', stickers:['😴','💤']},
+  {id:'lucu-food', rarity:'R', mode:'standard', cat:'lucu', name:'Food Fight', kao:'(っ˘ڡ˘ς) (๑>؂<๑)', you:'Pura-pura nyuapin pake tangan kosong', idol:'Buka mulut lebar "aaa~"', stickers:['🍙','🍰']},
+  {id:'lucu-alien', rarity:'N', mode:'standard', cat:'lucu', name:'Alien Contact', kao:'(⊙ヮ⊙) 👽', you:'Pose alien: dua jari V di dahi', idol:'Pose alien juga, mata melotot', stickers:['👽','🛸']},
   // chaos
-  {id:'chaos-jjk', mode:'standard', cat:'chaos', name:'JJK Domain Expansion', kao:'( ｰ̀дｰ́ )✋ (͡° ͜ʖ ͡°)', you:'Tangan bikin segel domain expansion', idol:'Segel juga, muka super serius', stickers:['🌀','☄️']},
-  {id:'chaos-wota', mode:'standard', cat:'chaos', name:'Wota Gaya Bebas', kao:'ヾ(≧▽≦*)o ┗(＾0＾)┓', you:'Freeze mid-wotagei, tangan ke atas', idol:'Ikutan wotagei, ketawa lepas', stickers:['🕺','🎤']},
-  {id:'chaos-drama', mode:'standard', cat:'chaos', name:'Dramatic Kdrama', kao:'(╥﹏╥) (ಥ‿ಥ)', you:'Tangan di dahi, pose pingsan drama', idol:'Nangkep kamu ala drama Korea', stickers:['🎬','😭']},
-  {id:'chaos-gyaru', mode:'standard', cat:'chaos', name:'Gyaru Peace Max', kao:'(★≧▽^))★☆', you:'Peace terbalik di bawah dagu, duck face', idol:'Peace terbalik juga, lidah keluar dikit', stickers:['💅','⭐']},
-  {id:'chaos-boss', mode:'standard', cat:'chaos', name:'Final Boss Pose', kao:'(｀∀´)Ψ (◣_◢)', you:'Pose villain: tangan bikin cakar', idol:'Cross arms, senyum menyeringai', stickers:['😈','⚔️']},
-  {id:'chaos-gravity', mode:'standard', cat:'chaos', name:'Gravity Falls', kao:'ヘ(￣ω￣ヘ) (ノ￣ω￣)ノ', you:'Miring 45° ke kiri kayak mau jatuh', idol:'Miring 45° ke kanan, saling nyeimbangin', stickers:['🫨','🌪️']},
+  {id:'chaos-jjk', rarity:'R', mode:'standard', cat:'chaos', name:'JJK Domain Expansion', kao:'( ｰ̀дｰ́ )✋ (͡° ͜ʖ ͡°)', you:'Tangan bikin segel domain expansion', idol:'Segel juga, muka super serius', stickers:['🌀','☄️']},
+  {id:'chaos-wota', rarity:'N', mode:'standard', cat:'chaos', name:'Wota Gaya Bebas', kao:'ヾ(≧▽≦*)o ┗(＾0＾)┓', you:'Freeze mid-wotagei, tangan ke atas', idol:'Ikutan wotagei, ketawa lepas', stickers:['🕺','🎤']},
+  {id:'chaos-drama', rarity:'SR', mode:'standard', cat:'chaos', name:'Dramatic Kdrama', kao:'(╥﹏╥) (ಥ‿ಥ)', you:'Tangan di dahi, pose pingsan drama', idol:'Nangkep kamu ala drama Korea', stickers:['🎬','😭']},
+  {id:'chaos-gyaru', rarity:'N', mode:'standard', cat:'chaos', name:'Gyaru Peace Max', kao:'(★≧▽^))★☆', you:'Peace terbalik di bawah dagu, duck face', idol:'Peace terbalik juga, lidah keluar dikit', stickers:['💅','⭐']},
+  {id:'chaos-boss', rarity:'SSR', mode:'standard', cat:'chaos', name:'Final Boss Pose', kao:'(｀∀´)Ψ (◣_◢)', you:'Pose villain: tangan bikin cakar', idol:'Cross arms, senyum menyeringai', stickers:['😈','⚔️']},
+  {id:'chaos-gravity', rarity:'SSR', mode:'standard', cat:'chaos', name:'Gravity Falls', kao:'ヘ(￣ω￣ヘ) (ノ￣ω￣)ノ', you:'Miring 45° ke kiri kayak mau jatuh', idol:'Miring 45° ke kanan, saling nyeimbangin', stickers:['🫨','🌪️']},
   
   // v1.1 Mode Expansion Poses (Duo Selfie)
-  {id:'selfie-kaget', mode:'selfie', cat:'lucu', name:'Selfie Kaget', kao:'(°□°）📱', you:'Pegang HP di bawah, muka kaget lihat kamera', idol:'Muncul dari atas kepala kamu, ikutan kaget', stickers:['📱','💥']},
+  {id:'selfie-kaget', rarity:'R', mode:'selfie', cat:'lucu', name:'Selfie Kaget', kao:'(°□°）📱', you:'Pegang HP di bawah, muka kaget lihat kamera', idol:'Muncul dari atas kepala kamu, ikutan kaget', stickers:['📱','💥']},
   
   // v1.1 Mode Expansion Poses (Solo Idol)
-  {id:'solo-peace', mode:'solo', cat:'classic', name:'Idol Peace', kao:'(^_−)☆', idol:'Satu mata kedip, jari peace di dekat mata', stickers:['✌️','✨']},
-  {id:'solo-andalan', mode:'solo', cat:'chaos', name:'Gaya Andalan', kao:'( 😎 )', idol:'Pose paling aneh / ikonik yang sering dilakuin member ini', stickers:['🤪','🔥']},
+  {id:'solo-peace', rarity:'N', mode:'solo', cat:'classic', name:'Idol Peace', kao:'(^_−)☆', idol:'Satu mata kedip, jari peace di dekat mata', stickers:['✌️','✨']},
+  {id:'solo-andalan', rarity:'R', mode:'solo', cat:'chaos', name:'Gaya Andalan', kao:'( 😎 )', idol:'Pose paling aneh / ikonik yang sering dilakuin member ini', stickers:['🤪','🔥']},
 
   // v1.1 Mode Expansion Poses (Group Cheki)
-  {id:'group-sandwich', mode:'group', cat:'classic', name:'Sandwich', kao:'(・∀・)(o_o)(・∀・)', you:'Berdiri manis di tengah, senyum', idol1:'Di kiri, ngerangkul', idol2:'Di kanan, ngerangkul juga', stickers:['🥪','⭐']},
-  {id:'group-ginyu', mode:'group', cat:'chaos', name:'Ginyu Force', kao:'(ง ͠° ͟ل͜ ͡°)ง', you:'Pose paling aneh di tengah', idol1:'Gaya jurus di kiri', idol2:'Gaya jurus di kanan', stickers:['💥','🌀']}
+  {id:'group-sandwich', rarity:'SR', mode:'group', cat:'classic', name:'Sandwich', kao:'(・∀・)(o_o)(・∀・)', you:'Berdiri manis di tengah, senyum', idol1:'Di kiri, ngerangkul', idol2:'Di kanan, ngerangkul juga', stickers:['🥪','⭐']},
+  {id:'group-ginyu', rarity:'SSR', mode:'group', cat:'chaos', name:'Ginyu Force', kao:'(ง ͠° ͟ل͜ ͡°)ง', you:'Pose paling aneh di tengah', idol1:'Gaya jurus di kiri', idol2:'Gaya jurus di kanan', stickers:['💥','🌀']}
 ];
 
 const tray = document.getElementById('tray');
@@ -577,7 +577,10 @@ function renderCheki(pose){
     <div class="photo">
       <span class="sticker s1">${pose.stickers[0]}</span>
       <span class="sticker s2">${pose.stickers[1]}</span>
-      <span class="pose-cat">${CAT_LABEL[pose.cat] || '???'}</span>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <span class="pose-cat">${CAT_LABEL[pose.cat] || '???'}</span>
+        <span class="rarity-badge rarity-${(pose.rarity || 'N').toLowerCase()}" style="margin:0">${pose.rarity || 'N'}</span>
+      </div>
       <div class="kaomoji">${pose.kao}</div>
       <div class="pose-name">${pose.name}</div>
     </div>

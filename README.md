@@ -57,9 +57,9 @@ Tinggal tambahkan object baru ke array `POSES` di `index.html`:
 - [x] 📋 **Copy instruksi** — satu tombol copy instruksi pose ke clipboard
 
 ### v1.3 — Gacha Feels
-- [ ] ⭐ **Rarity system** — pose common / rare / SSR dengan rate berbeda + animasi khusus SSR
-- [ ] 📚 **Pose collection book** — riwayat pose yang pernah didapat (localStorage), gotta collect 'em all
-- [ ] 🎰 **Pity system** — dijamin dapet SSR tiap 10 gacha, biar autentik wkwk
+- [x] ⭐ **Rarity system** — pose common / rare / SSR dengan rate berbeda + animasi khusus SSR
+- [x] 📚 **Pose collection book** — riwayat pose yang pernah didapat (localStorage), gotta collect 'em all
+- [x] 🎰 **Pity system** — dijamin dapet SSR tiap 10 gacha, biar autentik wkwk
 
 ### v1.4 — Customization
 - [ ] 🎨 **Theme picker** — warna kamera ganti sesuai warna oshi (member color)
