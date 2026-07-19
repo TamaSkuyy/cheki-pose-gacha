@@ -62,7 +62,13 @@ function pickPose(){
   pityCounter++;
   localStorage.setItem('cheki-pity', pityCounter);
   if (pityCounter >= 10) {
-    const ssrPool = pool.filter(p => p.rarity === 'SSR');
+    // Cari SSR di pool yang kefilter kategori dulu, tapi kalau kategori ini
+    // emang nggak punya SSR sama sekali, lebar-in pencarian ke seluruh mode
+    // yang aktif biar janji "dijamin SSR" tetap bisa ditepati.
+    let ssrPool = pool.filter(p => p.rarity === 'SSR');
+    if (ssrPool.length === 0) {
+      ssrPool = POSES.filter(p => p.mode === currentMode && p.rarity === 'SSR');
+    }
     if (ssrPool.length > 0) pool = ssrPool;
   }
 
