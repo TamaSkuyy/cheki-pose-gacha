@@ -219,11 +219,14 @@ h1 .blue{color:var(--soda);text-shadow:2px 2px 0 rgba(59,46,58,.12)}
   100%{opacity:0}
 }
 .kaomoji{
-  font-size:clamp(1.5rem,5.5vw,2rem);
-  font-weight:700;
-  text-align:center;
-  line-height:1.3;
-  word-break:keep-all;
+  display:flex;
+  justify-content:center;
+  width:100%;
+}
+.kaomoji svg{
+  width:100%;
+  height:auto;
+  display:block;
 }
 .pose-name{
   font-family:'Baloo 2',cursive;

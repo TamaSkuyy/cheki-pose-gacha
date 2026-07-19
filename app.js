@@ -145,7 +145,7 @@ function renderCheki(pose){
         <span class="pose-cat">${CAT_LABEL[pose.cat] || '???'}</span>
         <span class="rarity-badge rarity-${(pose.rarity || 'N').toLowerCase()}" style="margin:0">${pose.rarity || 'N'}</span>
       </div>
-      <div class="kaomoji">${pose.kao}</div>
+      <div class="kaomoji">${drawScene(pose)}</div>
       <div class="pose-name">${pose.name}</div>
     </div>
     <div class="caption">
