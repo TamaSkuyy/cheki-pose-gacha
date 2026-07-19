@@ -6,7 +6,7 @@ Pose generator interaktif untuk sesi **chekikai** (foto instax bareng idol). Kli
 
 ## ✨ Features
 
-- 🎲 **Random pose gacha** — 22 pose dengan kaomoji ilustrasi + instruksi terpisah untuk fan & idol
+- 🎲 **Random pose gacha** — 77 pose dengan kaomoji ilustrasi + instruksi terpisah untuk fan & idol
 - 📸 **Instax printing animation** — cheki slide keluar dari slot kamera + efek foto developing
 - 🏷️ **Filter kategori** — Classic, Lucu, Sweet, dan Chaos
 - 🔢 **Gacha counter** — nomor seri cheki di tiap hasil, berasa koleksi beneran
@@ -15,34 +15,44 @@ Pose generator interaktif untuk sesi **chekikai** (foto instax bareng idol). Kli
 
 ## 🚀 Getting Started
 
-Nggak butuh build step apapun — pure HTML/CSS/JS dalam satu file.
+Nggak butuh build step apapun — pure HTML/CSS/JS, tanpa framework. Data pose-nya di-load pakai `fetch('poses.json')`, jadi **wajib dibuka lewat server lokal** (nggak bisa double-click file, bakal kena CORS).
 
 ```bash
 # Clone repo
 git clone https://github.com/<username>/cheki-pose-gacha.git
 cd cheki-pose-gacha
 
-# Buka langsung di browser
-open index.html        # macOS
-start index.html       # Windows
+# Jalanin server lokal (pilih salah satu)
+python3 -m http.server 8000
+# atau
+npx serve .
 ```
 
-Atau deploy gratis ke **GitHub Pages**: Settings → Pages → deploy from branch `main`, folder `/ (root)`.
+Buka `http://localhost:8000` di browser.
+
+Deploy gratis ke **Netlify**: drag-and-drop folder project ini ke [app.netlify.com/drop](https://app.netlify.com/drop), atau connect repo GitHub-nya — nggak butuh build command, publish directory-nya `/ (root)`. Bisa juga ke **GitHub Pages**: Settings → Pages → deploy from branch `main`, folder `/ (root)`.
 
 ## 🎨 Menambah Pose Baru
 
-Tinggal tambahkan object baru ke array `POSES` di `index.html`:
+Tinggal tambahkan object baru ke array di `poses.json`:
 
-```js
+```json
 {
-  cat: 'sweet',                        // classic | lucu | sweet | chaos
-  name: 'Nama Pose',
-  kao: '(´｡• ᵕ •｡`) ♡',               // kaomoji ilustrasi
-  you: 'Instruksi pose untuk kamu',
-  idol: 'Instruksi pose untuk oshi',
-  stickers: ['💖', '✨']               // 2 emoji sticker di pojok foto
+  "id": "sweet-namaunik",
+  "rarity": "N",
+  "mode": "standard",
+  "cat": "sweet",
+  "name": "Nama Pose",
+  "kao": "(´｡• ᵕ •｡`) ♡",
+  "you": "Instruksi pose untuk kamu",
+  "idol": "Instruksi pose untuk oshi",
+  "stickers": ["💖", "✨"]
 }
 ```
+
+- `id` harus unik
+- `rarity`: `N` | `R` | `SR` | `SSR`
+- `mode`: `standard` | `selfie` | `solo` | `group` (mode `group` pakai `idol1` & `idol2`, bukan `idol`; mode `solo` cuma pakai `idol`, tanpa `you`)
 
 ## 🗺️ Roadmap / Future Plans
 
@@ -69,6 +79,7 @@ Tinggal tambahkan object baru ke array `POSES` di `index.html`:
 ## 🛠️ Tech Stack
 
 - Vanilla HTML / CSS / JavaScript — zero dependencies
+- File terpisah: `index.html`, `style.css`, `app.js`, `poses.json` (data pose di-fetch async)
 - Google Fonts: Baloo 2, Zen Maru Gothic, Caveat
 - CSS animations (`@keyframes`) untuk efek printing & developing
 
