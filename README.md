@@ -47,9 +47,9 @@ Tinggal tambahkan object baru ke array `POSES` di `index.html`:
 ## 🗺️ Roadmap / Future Plans
 
 ### v1.1 — Mode Expansion
-- [ ] 🤳 **Duo Selfie Mode** — pose selfie berdua (kamera dipegang fan), framing landscape
-- [ ] 💁 **Solo Idol Mode** — pose gacha buat idol yang lagi foto solo cheki / konten fansign
-- [ ] 🧑‍🤝‍🧑 **Group Cheki Mode** — pose untuk cheki bareng 2+ member sekaligus
+- [x] 🤳 **Duo Selfie Mode** — pose selfie berdua (kamera dipegang fan), framing landscape
+- [x] 💁 **Solo Idol Mode** — pose gacha buat idol yang lagi foto solo cheki / konten fansign
+- [x] 🧑‍🤝‍🧑 **Group Cheki Mode** — pose untuk cheki bareng 2+ member sekaligus
 
 ### v1.2 — Shareability
 - [ ] 💾 **Download as PNG** — export hasil cheki jadi gambar (html2canvas) buat di-share ke sosmed
