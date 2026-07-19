@@ -52,9 +52,9 @@ Tinggal tambahkan object baru ke array `POSES` di `index.html`:
 - [x] 🧑‍🤝‍🧑 **Group Cheki Mode** — pose untuk cheki bareng 2+ member sekaligus
 
 ### v1.2 — Shareability
-- [ ] 💾 **Download as PNG** — export hasil cheki jadi gambar (html2canvas) buat di-share ke sosmed
-- [ ] 🔗 **Share link** — URL dengan pose ID biar bisa kirim pose ke temen ("kita pose ini yuk!")
-- [ ] 📋 **Copy instruksi** — satu tombol copy instruksi pose ke clipboard
+- [x] 💾 **Download as PNG** — export hasil cheki jadi gambar (html2canvas) buat di-share ke sosmed
+- [x] 🔗 **Share link** — URL dengan pose ID biar bisa kirim pose ke temen ("kita pose ini yuk!")
+- [x] 📋 **Copy instruksi** — satu tombol copy instruksi pose ke clipboard
 
 ### v1.3 — Gacha Feels
 - [ ] ⭐ **Rarity system** — pose common / rare / SSR dengan rate berbeda + animasi khusus SSR

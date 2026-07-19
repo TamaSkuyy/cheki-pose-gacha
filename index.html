@@ -433,6 +433,12 @@ footer .heart{color:var(--ichigo)}
     </div>
   </div>
 
+  <div class="actions" id="actionsBar" style="display:none; gap:.5rem; justify-content:center; margin-bottom: 1.5rem; flex-wrap:wrap; position:relative; z-index:10;">
+    <button class="chip" id="btnDownload">💾 Simpan PNG</button>
+    <button class="chip" id="btnCopyLink">🔗 Copy Link</button>
+    <button class="chip" id="btnCopyText">📋 Copy Instruksi</button>
+  </div>
+
   <div class="controls">
     <div class="mode-select">
       <label for="gachaMode">Mode:</label>
@@ -459,45 +465,46 @@ footer .heart{color:var(--ichigo)}
   Dibuat dengan <span class="heart">♥</span> buat para wota yang suka mati gaya pas chekikai
 </footer>
 
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
 const POSES = [
   // classic
-  {mode:'standard', cat:'classic', name:'Double Peace', kao:'(￣▽￣)ｖ ｖ(＾ω＾)', you:'Peace sign dua tangan di samping pipi', idol:'Peace sign juga, badan miring dikit ke arah kamu', stickers:['✌️','⭐']},
-  {mode:'standard', cat:'classic', name:'Finger Heart Duo', kao:'(♡´∀`)人(´∀`♡)', you:'Finger heart Korea di depan dada', idol:'Finger heart ditempel ke finger heart kamu', stickers:['💗','✨']},
-  {mode:'standard', cat:'classic', name:'Salute Pose', kao:'(￣^￣)ゞ (｀・ω・´)ゞ', you:'Hormat ala militer, muka serius (tapi gagal)', idol:'Hormat balik, senyum profesional', stickers:['🫡','⭐']},
-  {mode:'standard', cat:'classic', name:'Back-to-Back Cool', kao:'(¬‿¬) (⌐■_■)', you:'Punggung-punggungan, tangan dilipat, muka sok cool', idol:'Sama, tapi nengok dikit ke kamera', stickers:['😎','🔥']},
-  {mode:'standard', cat:'classic', name:'Penlight Cheers', kao:'ヽ(＾Д＾)ﾉ ＼(◎o◎)／', you:'Angkat penlight kayak lagi toast', idol:'Tangan kepal semangat, mulut bilang "hoi!"', stickers:['🍻','🌟']},
+  {id:'classic-peace', mode:'standard', cat:'classic', name:'Double Peace', kao:'(￣▽￣)ｖ ｖ(＾ω＾)', you:'Peace sign dua tangan di samping pipi', idol:'Peace sign juga, badan miring dikit ke arah kamu', stickers:['✌️','⭐']},
+  {id:'classic-heart', mode:'standard', cat:'classic', name:'Finger Heart Duo', kao:'(♡´∀`)人(´∀`♡)', you:'Finger heart Korea di depan dada', idol:'Finger heart ditempel ke finger heart kamu', stickers:['💗','✨']},
+  {id:'classic-salute', mode:'standard', cat:'classic', name:'Salute Pose', kao:'(￣^￣)ゞ (｀・ω・´)ゞ', you:'Hormat ala militer, muka serius (tapi gagal)', idol:'Hormat balik, senyum profesional', stickers:['🫡','⭐']},
+  {id:'classic-cool', mode:'standard', cat:'classic', name:'Back-to-Back Cool', kao:'(¬‿¬) (⌐■_■)', you:'Punggung-punggungan, tangan dilipat, muka sok cool', idol:'Sama, tapi nengok dikit ke kamera', stickers:['😎','🔥']},
+  {id:'classic-toast', mode:'standard', cat:'classic', name:'Penlight Cheers', kao:'ヽ(＾Д＾)ﾉ ＼(◎o◎)／', you:'Angkat penlight kayak lagi toast', idol:'Tangan kepal semangat, mulut bilang "hoi!"', stickers:['🍻','🌟']},
   // sweet
-  {mode:'standard', cat:'sweet', name:'Big Heart Berdua', kao:'(っ˘з(˘⌣˘ )', you:'Tangan kanan bikin setengah hati', idol:'Tangan kiri nyambungin jadi hati utuh', stickers:['💖','🎀']},
-  {mode:'standard', cat:'sweet', name:'Cheek Heart', kao:'(´,,•ω•,,)♡', you:'Dua tangan bikin hati kecil di pipi sendiri', idol:'Nunjuk kamu sambil senyum "kawaii~"', stickers:['🥰','💕']},
-  {mode:'standard', cat:'sweet', name:'Head Pat (Virtual)', kao:'(´･ω･)ノ(._.`)', you:'Nunduk dikit, muka bahagia', idol:'Tangan melayang di atas kepala kamu (no touch!)', stickers:['🖐️','💮']},
-  {mode:'standard', cat:'sweet', name:'Love Beam', kao:'(♡-_-♡) ⌒☆', you:'Kena tembak: tangan di dada, pura-pura jatuh', idol:'Nembak love beam pake finger gun', stickers:['💘','⚡']},
-  {mode:'standard', cat:'sweet', name:'Mini Hug Frame', kao:'⊂(´・ω・｀⊂)', you:'Dua tangan bikin frame kotak, idol di dalamnya', idol:'Pose imut di dalam "frame" tangan kamu', stickers:['🖼️','💝']},
+  {id:'sweet-bigheart', mode:'standard', cat:'sweet', name:'Big Heart Berdua', kao:'(っ˘з(˘⌣˘ )', you:'Tangan kanan bikin setengah hati', idol:'Tangan kiri nyambungin jadi hati utuh', stickers:['💖','🎀']},
+  {id:'sweet-cheek', mode:'standard', cat:'sweet', name:'Cheek Heart', kao:'(´,,•ω•,,)♡', you:'Dua tangan bikin hati kecil di pipi sendiri', idol:'Nunjuk kamu sambil senyum "kawaii~"', stickers:['🥰','💕']},
+  {id:'sweet-pat', mode:'standard', cat:'sweet', name:'Head Pat (Virtual)', kao:'(´･ω･)ノ(._.`)', you:'Nunduk dikit, muka bahagia', idol:'Tangan melayang di atas kepala kamu (no touch!)', stickers:['🖐️','💮']},
+  {id:'sweet-beam', mode:'standard', cat:'sweet', name:'Love Beam', kao:'(♡-_-♡) ⌒☆', you:'Kena tembak: tangan di dada, pura-pura jatuh', idol:'Nembak love beam pake finger gun', stickers:['💘','⚡']},
+  {id:'sweet-frame', mode:'standard', cat:'sweet', name:'Mini Hug Frame', kao:'⊂(´・ω・｀⊂)', you:'Dua tangan bikin frame kotak, idol di dalamnya', idol:'Pose imut di dalam "frame" tangan kamu', stickers:['🖼️','💝']},
   // lucu
-  {mode:'standard', cat:'lucu', name:'Kucing Ganda', kao:'(=^･ω･^=) (=①ω①=)', you:'Cakar kucing dua tangan + "nya~"', idol:'Cakar kucing juga, kepala miring', stickers:['🐱','🐾']},
-  {mode:'standard', cat:'lucu', name:'Muscle Pose', kao:'ᕦ(ò_óˇ)ᕤ ᕙ(⇀‸↼‶)ᕗ', you:'Flexing biceps (ada atau nggak, tetep flexing)', idol:'Flexing balik lebih niat', stickers:['💪','🔥']},
-  {mode:'standard', cat:'lucu', name:'Kabedon Terbalik', kao:'(ﾟдﾟ；) (￣ー￣)', you:'Pura-pura kaget di-kabedon', idol:'Tangan nempel ke udara samping kepala kamu', stickers:['🧱','💥']},
-  {mode:'standard', cat:'lucu', name:'Sleeping Idol', kao:'(＿ ＿*) Z z z', you:'Nunjuk idol sambil muka panik', idol:'Pura-pura ketiduran, tangan jadi bantal', stickers:['😴','💤']},
-  {mode:'standard', cat:'lucu', name:'Food Fight', kao:'(っ˘ڡ˘ς) (๑>؂<๑)', you:'Pura-pura nyuapin pake tangan kosong', idol:'Buka mulut lebar "aaa~"', stickers:['🍙','🍰']},
-  {mode:'standard', cat:'lucu', name:'Alien Contact', kao:'(⊙ヮ⊙) 👽', you:'Pose alien: dua jari V di dahi', idol:'Pose alien juga, mata melotot', stickers:['👽','🛸']},
+  {id:'lucu-cat', mode:'standard', cat:'lucu', name:'Kucing Ganda', kao:'(=^･ω･^=) (=①ω①=)', you:'Cakar kucing dua tangan + "nya~"', idol:'Cakar kucing juga, kepala miring', stickers:['🐱','🐾']},
+  {id:'lucu-muscle', mode:'standard', cat:'lucu', name:'Muscle Pose', kao:'ᕦ(ò_óˇ)ᕤ ᕙ(⇀‸↼‶)ᕗ', you:'Flexing biceps (ada atau nggak, tetep flexing)', idol:'Flexing balik lebih niat', stickers:['💪','🔥']},
+  {id:'lucu-kabedon', mode:'standard', cat:'lucu', name:'Kabedon Terbalik', kao:'(ﾟдﾟ；) (￣ー￣)', you:'Pura-pura kaget di-kabedon', idol:'Tangan nempel ke udara samping kepala kamu', stickers:['🧱','💥']},
+  {id:'lucu-sleep', mode:'standard', cat:'lucu', name:'Sleeping Idol', kao:'(＿ ＿*) Z z z', you:'Nunjuk idol sambil muka panik', idol:'Pura-pura ketiduran, tangan jadi bantal', stickers:['😴','💤']},
+  {id:'lucu-food', mode:'standard', cat:'lucu', name:'Food Fight', kao:'(っ˘ڡ˘ς) (๑>؂<๑)', you:'Pura-pura nyuapin pake tangan kosong', idol:'Buka mulut lebar "aaa~"', stickers:['🍙','🍰']},
+  {id:'lucu-alien', mode:'standard', cat:'lucu', name:'Alien Contact', kao:'(⊙ヮ⊙) 👽', you:'Pose alien: dua jari V di dahi', idol:'Pose alien juga, mata melotot', stickers:['👽','🛸']},
   // chaos
-  {mode:'standard', cat:'chaos', name:'JJK Domain Expansion', kao:'( ｰ̀дｰ́ )✋ (͡° ͜ʖ ͡°)', you:'Tangan bikin segel domain expansion', idol:'Segel juga, muka super serius', stickers:['🌀','☄️']},
-  {mode:'standard', cat:'chaos', name:'Wota Gaya Bebas', kao:'ヾ(≧▽≦*)o ┗(＾0＾)┓', you:'Freeze mid-wotagei, tangan ke atas', idol:'Ikutan wotagei, ketawa lepas', stickers:['🕺','🎤']},
-  {mode:'standard', cat:'chaos', name:'Dramatic Kdrama', kao:'(╥﹏╥) (ಥ‿ಥ)', you:'Tangan di dahi, pose pingsan drama', idol:'Nangkep kamu ala drama Korea', stickers:['🎬','😭']},
-  {mode:'standard', cat:'chaos', name:'Gyaru Peace Max', kao:'(★≧▽^))★☆', you:'Peace terbalik di bawah dagu, duck face', idol:'Peace terbalik juga, lidah keluar dikit', stickers:['💅','⭐']},
-  {mode:'standard', cat:'chaos', name:'Final Boss Pose', kao:'(｀∀´)Ψ (◣_◢)', you:'Pose villain: tangan bikin cakar', idol:'Cross arms, senyum menyeringai', stickers:['😈','⚔️']},
-  {mode:'standard', cat:'chaos', name:'Gravity Falls', kao:'ヘ(￣ω￣ヘ) (ノ￣ω￣)ノ', you:'Miring 45° ke kiri kayak mau jatuh', idol:'Miring 45° ke kanan, saling nyeimbangin', stickers:['🫨','🌪️']},
+  {id:'chaos-jjk', mode:'standard', cat:'chaos', name:'JJK Domain Expansion', kao:'( ｰ̀дｰ́ )✋ (͡° ͜ʖ ͡°)', you:'Tangan bikin segel domain expansion', idol:'Segel juga, muka super serius', stickers:['🌀','☄️']},
+  {id:'chaos-wota', mode:'standard', cat:'chaos', name:'Wota Gaya Bebas', kao:'ヾ(≧▽≦*)o ┗(＾0＾)┓', you:'Freeze mid-wotagei, tangan ke atas', idol:'Ikutan wotagei, ketawa lepas', stickers:['🕺','🎤']},
+  {id:'chaos-drama', mode:'standard', cat:'chaos', name:'Dramatic Kdrama', kao:'(╥﹏╥) (ಥ‿ಥ)', you:'Tangan di dahi, pose pingsan drama', idol:'Nangkep kamu ala drama Korea', stickers:['🎬','😭']},
+  {id:'chaos-gyaru', mode:'standard', cat:'chaos', name:'Gyaru Peace Max', kao:'(★≧▽^))★☆', you:'Peace terbalik di bawah dagu, duck face', idol:'Peace terbalik juga, lidah keluar dikit', stickers:['💅','⭐']},
+  {id:'chaos-boss', mode:'standard', cat:'chaos', name:'Final Boss Pose', kao:'(｀∀´)Ψ (◣_◢)', you:'Pose villain: tangan bikin cakar', idol:'Cross arms, senyum menyeringai', stickers:['😈','⚔️']},
+  {id:'chaos-gravity', mode:'standard', cat:'chaos', name:'Gravity Falls', kao:'ヘ(￣ω￣ヘ) (ノ￣ω￣)ノ', you:'Miring 45° ke kiri kayak mau jatuh', idol:'Miring 45° ke kanan, saling nyeimbangin', stickers:['🫨','🌪️']},
   
   // v1.1 Mode Expansion Poses (Duo Selfie)
-  {mode:'selfie', cat:'lucu', name:'Selfie Kaget', kao:'(°□°）📱', you:'Pegang HP di bawah, muka kaget lihat kamera', idol:'Muncul dari atas kepala kamu, ikutan kaget', stickers:['📱','💥']},
+  {id:'selfie-kaget', mode:'selfie', cat:'lucu', name:'Selfie Kaget', kao:'(°□°）📱', you:'Pegang HP di bawah, muka kaget lihat kamera', idol:'Muncul dari atas kepala kamu, ikutan kaget', stickers:['📱','💥']},
   
   // v1.1 Mode Expansion Poses (Solo Idol)
-  {mode:'solo', cat:'classic', name:'Idol Peace', kao:'(^_−)☆', idol:'Satu mata kedip, jari peace di dekat mata', stickers:['✌️','✨']},
-  {mode:'solo', cat:'chaos', name:'Gaya Andalan', kao:'( 😎 )', idol:'Pose paling aneh / ikonik yang sering dilakuin member ini', stickers:['🤪','🔥']},
+  {id:'solo-peace', mode:'solo', cat:'classic', name:'Idol Peace', kao:'(^_−)☆', idol:'Satu mata kedip, jari peace di dekat mata', stickers:['✌️','✨']},
+  {id:'solo-andalan', mode:'solo', cat:'chaos', name:'Gaya Andalan', kao:'( 😎 )', idol:'Pose paling aneh / ikonik yang sering dilakuin member ini', stickers:['🤪','🔥']},
 
   // v1.1 Mode Expansion Poses (Group Cheki)
-  {mode:'group', cat:'classic', name:'Sandwich', kao:'(・∀・)(o_o)(・∀・)', you:'Berdiri manis di tengah, senyum', idol1:'Di kiri, ngerangkul', idol2:'Di kanan, ngerangkul juga', stickers:['🥪','⭐']},
-  {mode:'group', cat:'chaos', name:'Ginyu Force', kao:'(ง ͠° ͟ل͜ ͡°)ง', you:'Pose paling aneh di tengah', idol1:'Gaya jurus di kiri', idol2:'Gaya jurus di kanan', stickers:['💥','🌀']}
+  {id:'group-sandwich', mode:'group', cat:'classic', name:'Sandwich', kao:'(・∀・)(o_o)(・∀・)', you:'Berdiri manis di tengah, senyum', idol1:'Di kiri, ngerangkul', idol2:'Di kanan, ngerangkul juga', stickers:['🥪','⭐']},
+  {id:'group-ginyu', mode:'group', cat:'chaos', name:'Ginyu Force', kao:'(ง ͠° ͟ل͜ ͡°)ง', you:'Pose paling aneh di tengah', idol1:'Gaya jurus di kiri', idol2:'Gaya jurus di kanan', stickers:['💥','🌀']}
 ];
 
 const tray = document.getElementById('tray');
@@ -507,11 +514,13 @@ const counter = document.getElementById('counter');
 const emptyHint = document.getElementById('emptyHint');
 const filterWrap = document.getElementById('filters');
 const modeSelect = document.getElementById('gachaMode');
+const actionsBar = document.getElementById('actionsBar');
 
 let currentCat = 'all';
 let currentMode = 'standard';
 let count = 0;
 let lastIndex = -1;
+let activePose = null;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 modeSelect.addEventListener('change', e=>{
@@ -576,6 +585,10 @@ function renderCheki(pose){
       ${captionHTML}
       <div class="signature">— cheki #${String(count).padStart(3,'0')} ♡</div>
     </div>`;
+  
+  activePose = pose;
+  actionsBar.style.display = 'flex';
+  
   return el;
 }
 
@@ -604,6 +617,85 @@ btn.addEventListener('click', ()=>{
   counter.innerHTML = `Udah gacha <b>${count}</b> kali ✦ ${count>=10?'sabar, pose SSR pasti keluar 😤':'semoga dapet pose SSR'}`;
 
   setTimeout(()=>{ btn.disabled = false; }, reduceMotion? 150 : 1000);
+});
+
+// v1.2 Shareability Functions
+document.getElementById('btnCopyLink').addEventListener('click', () => {
+  if(!activePose || !activePose.id) return;
+  const url = new URL(window.location.href);
+  url.searchParams.set('pose', activePose.id);
+  navigator.clipboard.writeText(url.toString())
+    .then(() => alert('✅ Link berhasil dicopy! Kasih ke temanmu supaya mereka dapet pose ini.'));
+});
+
+document.getElementById('btnCopyText').addEventListener('click', () => {
+  if(!activePose) return;
+  let txt = `📸 Pose Gacha: ${activePose.name}\n`;
+  if(activePose.you) txt += `Fan: ${activePose.you}\n`;
+  if(activePose.idol) txt += `Oshi: ${activePose.idol}\n`;
+  if(activePose.idol1) txt += `Oshi 1: ${activePose.idol1}\n`;
+  if(activePose.idol2) txt += `Oshi 2: ${activePose.idol2}\n`;
+  navigator.clipboard.writeText(txt)
+    .then(() => alert('✅ Instruksi berhasil dicopy!'));
+});
+
+document.getElementById('btnDownload').addEventListener('click', () => {
+  const el = tray.querySelector('.cheki');
+  if(!el || !window.html2canvas) {
+    alert('Loading script... coba sebentar lagi!');
+    return;
+  }
+  
+  // Temporarily remove animation for capturing
+  const oldTransform = el.style.transform;
+  const oldAnimation = el.style.animation;
+  const oldOpacity = el.style.opacity;
+  
+  el.style.animation = 'none';
+  el.style.transform = 'translateY(0) rotate(-1.4deg)'; // tetapkan rotasi sedikit supaya estetik
+  el.style.opacity = '1'; // FIX: karena default CSS-nya opacity: 0
+  
+  // Beri jeda sedikit agar browser menerapkan style CSS yang baru sebelum di-capture
+  setTimeout(() => {
+    html2canvas(el, { backgroundColor: null, scale: 2, logging: false }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `cheki-${activePose.id || 'gacha'}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      
+      // Restore styling
+      el.style.transform = oldTransform;
+      el.style.animation = oldAnimation;
+      el.style.opacity = oldOpacity;
+    });
+  }, 100);
+});
+
+// Auto-load pose from URL if exists
+window.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const poseId = urlParams.get('pose');
+  if(poseId) {
+    const targetPose = POSES.find(p => p.id === poseId);
+    if(targetPose) {
+      emptyHint.style.display = 'none';
+      count = 1;
+      const cheki = renderCheki(targetPose);
+      tray.appendChild(cheki);
+      cheki.classList.add('printing');
+      counter.innerHTML = `Pose di-share temanmu ✦`;
+      
+      // Select correct dropdowns
+      modeSelect.value = targetPose.mode;
+      currentMode = targetPose.mode;
+      
+      // Highlight correct category chip
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      const targetChip = document.querySelector(`.chip[data-cat="${targetPose.cat}"]`);
+      if(targetChip) targetChip.classList.add('active');
+      currentCat = targetPose.cat;
+    }
+  }
 });
 </script>
 </body>
