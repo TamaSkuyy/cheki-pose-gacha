@@ -4,17 +4,20 @@ const DICT = {
     title: 'Gacha Pose', subtitle: 'Biar ga mati gaya pas ketemu oshi!', mode: 'Mode:',
     m_std: '📸 Standard (Kamu + Oshi)', m_selfie: '🤳 Duo Selfie', m_solo: '💁 Solo Idol', m_grp: '🧑‍🤝‍🧑 Group Cheki',
     btnRandom: '🎲 Gacha Pose!', btnCustom: '✍️ Tambah Pose', cat_all: 'Semua', cat_custom: 'Custom',
-    albumTitle: '📚 Buku Koleksi Pose', customTitle: '✍️ Buat Pose Sendiri', customSave: 'Simpan Pose'
+    albumTitle: '📚 Buku Koleksi Pose', customTitle: '✍️ Buat Pose Sendiri', customSave: 'Simpan Pose',
+    rulesTitle: '📜 Etika Chekikai'
   },
   en: {
     title: 'Pose Gacha', subtitle: 'No more awkward poses with your oshi!', mode: 'Mode:',
     m_std: '📸 Standard (Fan + Oshi)', m_selfie: '🤳 Duo Selfie', m_solo: '💁 Solo Idol', m_grp: '🧑‍🤝‍🧑 Group Cheki',
     btnRandom: '🎲 Draw Pose!', btnCustom: '✍️ Custom Pose', cat_all: 'All', cat_custom: 'Custom',
-    albumTitle: '📚 Pose Collection', customTitle: '✍️ Create Custom Pose', customSave: 'Save Pose'
+    albumTitle: '📚 Pose Collection', customTitle: '✍️ Create Custom Pose', customSave: 'Save Pose',
+    rulesTitle: '📜 Chekikai Etiquette'
   }
 };
 
 let POSES = [];
+let RULES = { id: [], en: [] };
 const collection = JSON.parse(localStorage.getItem('cheki-collection') || '[]');
 
 const tray = document.getElementById('tray');
@@ -271,6 +274,26 @@ document.getElementById('btnCloseAlbum').addEventListener('click', () => {
   document.getElementById('albumModal').classList.remove('open');
 });
 
+// v1.5 Chekikai Etiquette Rules
+function renderRules(){
+  const list = document.getElementById('rulesList');
+  list.innerHTML = '';
+  (RULES[currentLang] || []).forEach(rule => {
+    const li = document.createElement('li');
+    li.textContent = rule;
+    list.appendChild(li);
+  });
+}
+
+document.getElementById('btnRules').addEventListener('click', () => {
+  renderRules();
+  document.getElementById('rulesModal').classList.add('open');
+});
+
+document.getElementById('btnCloseRules').addEventListener('click', () => {
+  document.getElementById('rulesModal').classList.remove('open');
+});
+
 // v1.4 Custom Pose Functions
 document.getElementById('btnCustomPose').addEventListener('click', () => {
   document.getElementById('customModal').classList.add('open');
@@ -327,6 +350,7 @@ function applyLang() {
   document.getElementById('btnDownload').innerHTML = currentLang === 'id' ? '💾 Simpan PNG' : '💾 Save PNG';
   document.getElementById('btnCopyLink').innerHTML = currentLang === 'id' ? '🔗 Copy Link' : '🔗 Copy Link';
   document.getElementById('btnCopyText').innerHTML = currentLang === 'id' ? '📋 Copy Instruksi' : '📋 Copy Text';
+  if (document.getElementById('rulesModal').classList.contains('open')) renderRules();
 }
 document.getElementById('btnLang').addEventListener('click', () => {
   currentLang = currentLang === 'id' ? 'en' : 'id';
@@ -342,9 +366,14 @@ async function loadPoses(){
   POSES = [...basePoses, ...savedCustom];
 }
 
+async function loadRules(){
+  const res = await fetch('rules.json');
+  RULES = await res.json();
+}
+
 async function init(){
   btn.disabled = true;
-  await loadPoses();
+  await Promise.all([loadPoses(), loadRules()]);
   btn.disabled = false;
 
   applyLang();

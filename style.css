@@ -459,6 +459,21 @@ h1 .blue{color:var(--soda);text-shadow:2px 2px 0 rgba(59,46,58,.12)}
 .rarity-badge.rarity-sr{background:#ffb8e6}
 .rarity-badge.rarity-ssr{background:linear-gradient(135deg,var(--lemon),#ff8fb0)}
 
+.rules-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:.65rem;
+}
+.rules-list li{
+  font-size:.85rem;
+  line-height:1.5;
+  background:#fff;
+  border:2px solid var(--ink);
+  border-radius:10px;
+  padding:.55rem .7rem;
+}
+
 /* ── footer ── */
 footer{
   text-align:center;

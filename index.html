@@ -68,6 +68,17 @@
     </div>
   </div>
 
+  <!-- Modal Rules -->
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="rulesTitle">📜 Etika Chekikai</h2>
+        <button class="btn-close" id="btnCloseRules">&times;</button>
+      </div>
+      <ul class="rules-list" id="rulesList"></ul>
+    </div>
+  </div>
+
   <div class="tray" id="tray" aria-live="polite">
     <div class="empty-hint" id="emptyHint">
       <span class="arrow">👇</span>
@@ -94,6 +105,7 @@
     <div style="display:flex; gap:.5rem;">
       <button class="btn-random" id="btnRandom" data-i18n="btnRandom">🎲 Gacha Pose!</button>
       <button class="btn-random" id="btnAlbum" style="padding:.85rem; background:#fff; color:var(--ink);" title="Album">📚</button>
+      <button class="btn-random" id="btnRules" style="padding:.85rem; background:#fff; color:var(--ink);" title="Etika Chekikai">📜</button>
     </div>
     <div class="filters" id="filters" role="group" aria-label="Filter kategori pose">
       <button class="chip active" data-cat="all" data-i18n="cat_all">Semua</button>
